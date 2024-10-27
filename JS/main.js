@@ -8,6 +8,8 @@ let $toggleCarritoBtn = document.getElementById("toggleCarrito");
 function greenShop(){
     onShopCart()
     buy()
+    pay();
+
 }
 
 
@@ -85,6 +87,24 @@ function removeItem(idBuscado) {
     console.log("Carrito actualizado", $carrito); // Mostrar el carrito actualizado
 }
 
+// Función para manejar el pago
+function pay() {
+    const $payButton = document.querySelector("#checkout"); // Selecciona el botón de pago usando su ID o clase
+
+    if ($payButton) {
+        $payButton.addEventListener("click", () => {
+            if ($carrito.length > 0) {
+                alert("Gracias por comprar en GreenShop");
+                $carrito = []; // Vaciar el carrito después de pagar
+                mostrarCarrito(); // Actualizar la visualización
+                setInterval("location.reload()", 3000);//Refresco pagina post abonar
+            } else {
+                alert("El carrito está vacío.");
+            }
+        });
+
+    }
+}
 
 
 
@@ -105,6 +125,5 @@ function removeItem(idBuscado) {
 //Anotaciones IMPORTANTES.
 //Preguntar por que me falla cambio de clases
 //MALA PRACTICA USAR EL STYLE EN JS PERO SI NO, NO PUEDO CORREGIR PAGINA
-//Pregunta si se puede usar LocalStorage para crear "Falsa Base de datos"
-//Crear "Falsa base de datos, en un archivo y usar promesas para traer y visualizar seria mas facil de esa manera"
+//Crearada "Falsa base de datos,ahora falta usar promesas para traer y visualizar "
 //Mejorar estilos.
