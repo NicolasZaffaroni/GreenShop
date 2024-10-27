@@ -1,0 +1,154 @@
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    margin: 0;
+    padding: 0;
+}
+
+
+nav {
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 10px 20px; 
+    text-align: center;
+    font-size: x-large;
+}
+
+nav ul {
+    list-style: none; 
+    padding: 0; 
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px; 
+}
+
+nav a {
+    color: white; 
+    text-decoration: none; 
+}
+
+
+header {
+    font-family: "Handlee", cursive;
+    font-size: x-large;
+    text-align: center; 
+    padding: 20px; 
+}
+
+
+
+/*Uso estilos sobre ID por que el boton esta oculto y se muestra por JS, pero esta fallando REVISAR!!!!*/
+#toggleCarrito { 
+    top: 20px;  
+    left: 20px; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 24px; 
+    color: #333; 
+    padding: 10px; 
+}
+
+#toggleCarrito:hover {
+    color: #4CAF50; /
+}
+
+
+#carritoContainer {
+    display: none; 
+    border: 1px solid #ccc; 
+    padding: 16px; 
+    background-color: #f9f9f9; 
+    position: fixed; 
+    top: 80px; 
+    left: 20px; 
+    width: 300px; 
+    max-height: 400px; 
+    overflow-y: auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    z-index: 1000; 
+}
+
+/* Estilos para las cartas de productos */
+.product-section {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    padding: 20px; 
+}
+
+.product-card {
+    font-family: "Handlee", cursive;
+    font-size: large;
+    border: 1px solid #ccc; 
+    padding: 16px; 
+    margin: 10px; 
+    text-align: center; 
+    width: 250px;  }
+
+
+    .product-card-checkout {
+        display: flex;
+        flex-wrap: wrap; 
+        align-items: center; 
+        padding: 10px;
+        margin: 10px 0; 
+        max-width: 100px;
+        width: 80px;
+        height: auto;
+        }
+        
+
+
+
+
+    .product-card img{
+        width: 100%; 
+        height: auto; 
+        max-height: 200px; 
+        object-fit: cover; 
+        border-radius: 5px; 
+}
+
+
+    .add-to-cart {
+        background-color: #4CAF50; 
+        color: white; 
+        border: none;
+        border-radius: 5px; 
+        padding: 10px 20px; 
+        cursor: pointer; 
+        font-size: 16px; 
+        transition: background-color 0.3s ease; 
+    }
+    
+    .add-to-cart:hover {
+        background-color: #45a049; 
+    }
+    
+    .add-to-cart:active {
+        background-color: #397d3b;
+    }
+
+
+.checkout{
+    background-color: #4CAF50; 
+    color: white; 
+    border: none;
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease; 
+}
+
+.checkout:hover {
+    background-color: #45a049; 
+}
+
+.checkout:active {
+    background-color: #397d3b;
+}

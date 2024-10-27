@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script defer src="./JS/main.js"></script>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Local de Plantas</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav>
+        <ul>
+            <li><a href="#" aria-label="Home"><i class="fas fa-home"></i></a></li>
+            <li><a href="#" aria-label="Carrito"><i class="fas fa-shopping-cart"></i></a></li>
+            <li><a href="#" aria-label="Contacto"><i class="fas fa-address-book"></i></a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Bienvenido a GreenShop</h1>
+        <p>Encuentra las mejores plantas para tu hogar</p>
+    </header>
+
+    <button id="toggleCarrito" aria-label="Ver Carrito">
+        <i class="fas fa-shopping-cart"></i>
+    </button>
+    
+    <!-- Carrito -->
+    <section id="carritoContainer" class="carritoContainer" > <!-- Inicialmente oculto -->
+        <h2>Carrito de Compras</h2>
+        <div id="carritoItems">
+            <!-- Aquí se agregarán los productos seleccionados -->
+        </div>
+        <button id="checkout" class="checkout">Checkout</button>
+    </section>
+
+    <section class="product-section">
+        <div class="product-card" id="product-suculenta">
+            <img src="./assets/images/suculenta.jpg" alt="Planta Suculenta">
+            <h2>Planta Suculenta</h2>
+            <p>Ideal para interiores, requiere poco riego.</p>
+            <span class="price">$15.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-helecho">
+            <img src="./assets/images/helecho.jpg" alt="Helecho">
+            <h2>Helecho</h2>
+            <p>Perfecto para decorar espacios amplios y luminosos.</p>
+            <span class="price">$25.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-cactus">
+            <img src="./assets/images/cactus.jpg" alt="Cactus">
+            <h2>Cactus</h2>
+            <p>Fácil de cuidar, recomendado para principiantes.</p>
+            <span class="price">$10.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-bonsai">
+            <img src="./assets/images/Bonsai.jpg" alt="Bonsai">
+            <h2>Bonsai</h2>
+            <p>Un toque zen para tu hogar.</p>
+            <span class="price">$50.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-aloe-vera">
+            <img src="./assets/images/aloe-vera.jpg" alt="Aloe Vera">
+            <h2>Aloe Vera</h2>
+            <p>Ideal para la piel, fácil de cuidar.</p>
+            <span class="price">$20.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-lavanda">
+            <img src="./assets/images/lavanda-officinalis.jpg" alt="Lavanda">
+            <h2>Lavanda</h2>
+            <p>Planta aromática para interiores y exteriores.</p>
+            <span class="price">$18.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-orquidea">
+            <img src="./assets/images/orquidea.webp" alt="Orquídea">
+            <h2>Orquídea</h2>
+            <p>Flor delicada y elegante.</p>
+            <span class="price">$35.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-palmera">
+            <img src="./assets/images/palmera.jpg" alt="Palmera de interior">
+            <h2>Palmera de interior</h2>
+            <p>Añade frescura y estilo a tu hogar.</p>
+            <span class="price">$45.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-hiedra">
+            <img src="./assets/images/hiedra.jpg" alt="Hiedra">
+            <h2>Hiedra</h2>
+            <p>Planta trepadora perfecta para exteriores.</p>
+            <span class="price">$22.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+        <div class="product-card" id="product-ficus">
+            <img src="./assets/images/ficus.jpg" alt="Ficus">
+            <h2>Ficus</h2>
+            <p>Un clásico para interiores luminosos.</p>
+            <span class="price">$30.00</span>
+            <button class="add-to-cart">Agregar al carrito</button>
+        </div>
+    </section>
+</body>
+</html>
