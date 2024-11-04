@@ -12,7 +12,7 @@ function greenShop() {
 
 
 function CarritoDisplay() {
-    $toggleCarritoBtn.addEventListener( () => {
+    $toggleCarritoBtn.addEventListener("click", () => {
         if ($carrito.length > 0) { // Comprobar si hay elementos en el carrito
             $carritoContainer.style.display = "block"; // Muestra el contenedor del carrito
             console.log("Mostrando el carrito con artículos");
