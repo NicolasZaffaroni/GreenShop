@@ -10,17 +10,19 @@ function greenShop() {
     pay();
 }
 
-function CarritoDisplay() {
-    if ($carrito.length > 0) { // Comprobar si hay elementos en el carrito
-        $carritoContainer.style.display = "block"; // Muestra el contenedor del carrito
-        console.log("Mostrando el carrito con artículos");
-        mostrarCarrito(); // Muestra los artículos en el carrito si hay
-    } else {
-        alert("El carrito está vacío.");
-        $carritoContainer.style.display = "none"; // Oculta el carrito si está vacío
-    }
-}
 
+function CarritoDisplay() {
+    $toggleCarritoBtn.addEventListener( () => {
+        if ($carrito.length > 0) { // Comprobar si hay elementos en el carrito
+            $carritoContainer.style.display = "block"; // Muestra el contenedor del carrito
+            console.log("Mostrando el carrito con artículos");
+            mostrarCarrito(); // Muestra los artículos en el carrito si hay
+        } else {
+            alert("El carrito está vacío.");
+            $carritoContainer.style.display = "none"; // Oculta el carrito si está vacío
+        }
+    });
+}
 
 function buyPlants() {
     document.querySelectorAll(".add-to-cart").forEach((button) => {
