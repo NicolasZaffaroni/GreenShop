@@ -1,129 +1,194 @@
-let $carrito = []; // Array para guardar los productos del carrito
+
+let $carrito = [];
 let $carritoContainer = document.getElementById("carritoContainer");
 let $toggleCarritoBtn = document.getElementById("toggleCarrito");
+let $carritoItemsContainer = document.querySelector("#carritoItems");
 
-
-
-//GreenShop Conjunto de funciones
-function greenShop(){
-    onShopCart()
-    buy()
+function greenShop() {
+    CarritoDisplay();
+    buyPlants();
     pay();
+}
 
+function CarritoDisplay() {
+    if ($carrito.length > 0) { // Comprobar si hay elementos en el carrito
+        $carritoContainer.style.display = "block"; // Muestra el contenedor del carrito
+        console.log("Mostrando el carrito con artículos");
+        mostrarCarrito(); // Muestra los artículos en el carrito si hay
+    } else {
+        alert("El carrito está vacío.");
+        $carritoContainer.style.display = "none"; // Oculta el carrito si está vacío
+    }
 }
 
 
-function onShopCart(){
-    $toggleCarritoBtn.addEventListener("click", () => {
-        if ($carritoContainer.length === 0){ //Falla en cuanto entro sale carrito 
-            this.classList.add('#carritoContainer') // Oculta el carrito
-        } else {
-            $carritoContainer.style.display = "none"; 
-        }
-    })
-}
-;
-function buy(){
-// Agregar eventos a los botones de agregar al carrito
-    document.querySelectorAll(".add-to-cart").forEach((button) => { 
+function buyPlants() {
+    document.querySelectorAll(".add-to-cart").forEach((button) => {
         button.addEventListener("click", () => {
-            let $productCard = button.parentElement; // Obtener el contenedor del producto//Tambien se puede usar Closest
-            let $productoId = $productCard.getAttribute("id");
-            let $productoNombre = $productCard.querySelector("h2").textContent;
-            let $productoPrecio = $productCard.querySelector(".price").textContent;
-            let $productoImagen = $productCard.querySelector("img").src;
+            let findProductId = button.closest(".product-card").getAttribute("id");
 
-            // Agregar producto al carrito
-            $carrito.push({ id: $productoId, nombre: $productoNombre, precio: $productoPrecio, imagen: $productoImagen });
-
-            // Actualizar la visualización del carrito
-            mostrarCarrito();
-            console.log($carrito); // Comprobar carrito
-            console.log($carritoContainer.classList);//Ver Clase del carrito VALUE IMPORTANTE!
+            addToCart(findProductId, products);
         });
-});
+    });
 }
 
 function mostrarCarrito() {
-    let $carritoItemsContainer = document.querySelector("#carritoItems");
-    $carritoItemsContainer.innerHTML = ""; 
+    $carritoItemsContainer.innerHTML = ""; // Limpiar el contenedor de ítems
+    let total = 0; // Variable para el precio total a pagar
 
-    // Agregar productos al carrito 
+    // Mostrar cada producto en el carrito
     $carrito.forEach((product) => {
         let $div = document.createElement("div");
-        $div.classList.add("cart-item"); 
+        $div.classList.add("carritoItems");
 
         let $imagen = document.createElement("img");
-        $imagen.src = product.imagen; 
+        $imagen.src = product.imagen;
         $imagen.alt = product.nombre;
-        $imagen.style.width = "80px"; // Ajusta el tamaño según sea necesario
-        $imagen.style.height = "auto"; // Mantiene la relación de aspecto
+        $imagen.style.width = "50px";
+        $imagen.style.height = "auto";
 
         let $descripcion = document.createElement("div");
-        $descripcion.innerHTML = `<strong>${product.nombre}</strong><br>${product.precio}`;
+        $descripcion.innerHTML = `
+            <div class="product-name">${product.nombre}</div>
+            <div class="product-price">Precio: $${product.precio}</div>
+            <div class="product-stock">Disponibles: <span>${product.stock}</span></div>
+            <div class="product-cantidad">Cantidad en carrito: <span>${product.cantidad}</span></div>
+        `;
 
-        // Crear botón de eliminar
         let $btnRemove = document.createElement('button');
-        $btnRemove.textContent = "Eliminar"; // Texto del botón
-        $btnRemove.classList.add('remove-item'); // Agrega una clase para estilo
+        $btnRemove.textContent = "Eliminar";
+        $btnRemove.classList.add('remove-item');
 
-        // Agregar evento al botón de eliminar
-        $btnRemove.addEventListener('click', () => {
-            removeItem(product.id); // Llama a la función removeItem
+        let $btnStockMore = document.createElement('button');
+        $btnStockMore.textContent = '+'; 
+        $btnStockMore.classList.add('remove-item');
+
+        let $btnStockLess = document.createElement('button');
+        $btnStockLess.textContent = '-'; 
+        $btnStockLess.classList.add('remove-item');
+
+        $btnStockMore.addEventListener('click', () => {
+            adjustQuantity(product.id, 'increase');
         });
 
-        $div.appendChild($imagen); 
+        $btnStockLess.addEventListener('click', () => {
+            adjustQuantity(product.id, 'decrease');
+        });
+
+        $btnRemove.addEventListener('click', () => {
+            removeItem(product.id);
+        });
+
+        total += product.precio * product.cantidad; // Sumar al total de todos los productos en el carrito 
+
+        $div.appendChild($imagen);
         $div.appendChild($descripcion);
-        $div.appendChild($btnRemove); // Agregar el botón de eliminar al div
-        $carritoItemsContainer.appendChild($div); 
+        $div.appendChild($btnRemove);
+        $div.appendChild($btnStockMore);
+        $div.appendChild($btnStockLess);
+        $carritoItemsContainer.appendChild($div);
     });
-    $carritoContainer.style.display = "block"; 
+
+    // Crear y mostrar el total en la parte inferior del carrito
+    let $totalDisplay = document.createElement("div");
+    $totalDisplay.classList.add("carrito-total");
+    $totalDisplay.innerHTML = `<strong>Total a pagar: $${total}</strong>`;
+    $carritoItemsContainer.appendChild($totalDisplay);
+
+    // Crear el botón de "Limpiar carrito" y añadirlo debajo del total
+    let $btnCleancarrito = document.createElement('button');
+    $btnCleancarrito.textContent = 'Limpiar carrito';
+    $btnCleancarrito.classList.add('remove-item');
+    $btnCleancarrito.addEventListener('click', () => {
+        vaciarCarrito();
+    });
+    $carritoItemsContainer.appendChild($btnCleancarrito);
+}
+
+
+
+function vaciarCarrito() {
+    $carrito = []; // Vacía el carrito
+    mostrarCarrito(); // Actualiza la visualización del carrito
+
+    if ($carrito.length === 0) { 
+        // Si el carrito está vacío, oculta el contenedor
+        $carritoContainer.style.display = "none"; 
+    } else {
+        // Si el carrito tiene artículos, asegúrate de que esté visible
+        $carritoContainer.style.display = "block";
+    } 
 }
 
 function removeItem(idBuscado) {
-    // Filtrar el carrito para eliminar el producto con el ID buscado
     $carrito = $carrito.filter(plant => plant.id !== idBuscado);
-    mostrarCarrito(); // Actualizar la visualización del carrito
-    console.log("Carrito actualizado", $carrito); // Mostrar el carrito actualizado
+    mostrarCarrito();
+    console.log("Carrito actualizado", $carrito);
 }
 
-// Función para manejar el pago
+
+function adjustQuantity(productId, action) {
+    let carritoItem = $carrito.find(item => item.id === productId);
+
+    if (carritoItem) {
+        if (action === 'increase' && carritoItem.stock > 0) {
+            carritoItem.cantidad += 1;
+            carritoItem.stock -= 1;
+        } else if (action === 'decrease' && carritoItem.cantidad > 1) {
+            carritoItem.cantidad -= 1;
+            carritoItem.stock += 1;
+        } else {
+            alert("No se puede realizar esta acción.");
+        }
+        mostrarCarrito(); // Actualizar la visualización del carrito
+    }
+}
+
 function pay() {
-    const $payButton = document.querySelector("#checkout"); // Selecciona el botón de pago usando su ID o clase
+    let $payButton = document.querySelector("#checkout");
 
     if ($payButton) {
         $payButton.addEventListener("click", () => {
             if ($carrito.length > 0) {
                 alert("Gracias por comprar en GreenShop");
-                $carrito = []; // Vaciar el carrito después de pagar
-                mostrarCarrito(); // Actualizar la visualización
-                setInterval("location.reload()", 3000);//Refresco pagina post abonar
+                $carrito = [];
+                mostrarCarrito();
+                setInterval("location.reload()", 500);
             } else {
                 alert("El carrito está vacío.");
             }
         });
-
     }
 }
 
+function addToCart(productId, products) {
+    let product = products.find(item => item.id === productId);
 
+    if (product) {
+        let carritoItem = $carrito.find(item => item.id === productId);
+        if (carritoItem) {
+            if (carritoItem.stock > 0) {
+                carritoItem.cantidad += 1;
+                carritoItem.stock -= 1;
+            } else {
+                alert("Este artículo no posee más stock.");
+            }
+        } else {
+            $carrito.push({
+                id: product.id,
+                nombre: product.nombre,
+                precio: product.precio,
+                imagen: product.imagen,
+                stock: product.stock - 1,
+                cantidad: 1
+            });
+        }
+        mostrarCarrito();
+    } else {
+        console.error("Producto no encontrado.");
+    }
+}
 
-    // Mostrar el contenedor del carrito
-    console.log($carrito);
-
-
-
-
-    greenShop()
-
-
-
-
-
-
-
-//Anotaciones IMPORTANTES.
-//Preguntar por que me falla cambio de clases
-//MALA PRACTICA USAR EL STYLE EN JS PERO SI NO, NO PUEDO CORREGIR PAGINA
-//Crearada "Falsa base de datos,ahora falta usar promesas para traer y visualizar "
-//Mejorar estilos.
+document.addEventListener("DOMContentLoaded", () => {
+    greenShop();
+});

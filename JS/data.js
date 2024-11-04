@@ -1,7 +1,7 @@
-const productos = [
+const products= [
     {
         id: "product-suculenta",
-        nombre: "Planta Suculenta",
+        nombre: "Suculenta",
         descripcion: "Ideal para interiores, requiere poco riego.",
         precio: 15.00,
         imagen: "./assets/images/suculenta.jpg",
@@ -57,7 +57,7 @@ const productos = [
     },
     {
         id: "product-palmera",
-        nombre: "Palmera de interior",
+        nombre: "Palmera",
         descripcion: "Añade frescura y estilo a tu hogar.",
         precio: 45.00,
         imagen: "./assets/images/palmera.jpg",
