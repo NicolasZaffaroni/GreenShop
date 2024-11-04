@@ -155,7 +155,6 @@ function pay() {
                 alert("Gracias por comprar en GreenShop");
                 $carrito = [];
                 mostrarCarrito();
-                setInterval("location.reload()", 500);
             } else {
                 alert("El carrito está vacío.");
             }
